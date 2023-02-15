@@ -4,6 +4,7 @@ import hello.security.model.User;
 import hello.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -61,5 +62,12 @@ public class IndexController {
     @ResponseBody
     public String info(){
         return "개인정보";
+    }
+    //두개이상의 ROLE에 대해서 AUTH할거면 Preauthorize선언
+    @PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
+    @GetMapping("/data")
+    @ResponseBody
+    public String data(){
+        return "data";
     }
 }

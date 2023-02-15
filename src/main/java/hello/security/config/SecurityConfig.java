@@ -14,7 +14,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity//스프링 시큐리터필터(Security Config클래스)가 스프링필터체인에 등록된다
-@EnableGlobalMethodSecurity(securedEnabled = true)//@Secure어노테이션으로 쉽게 메서드별 권한 설정을 할 수 있도록 해줌
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)//@Secure어노테이션으로 쉽게 메서드별 권한 설정을 할 수 있도록 해줌
 public class SecurityConfig{
 
     //return 되는 오브젝트를 스프링빈으로 등록해줌
