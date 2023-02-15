@@ -3,6 +3,7 @@ package hello.security.controller;
 import hello.security.model.User;
 import hello.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequiredArgsConstructor
 public class IndexController {
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder encoder;
     @GetMapping
     public String index(){
         return "index";
@@ -37,14 +39,15 @@ public class IndexController {
         return "joinForm";
     }
     @PostMapping("/join")
-    @ResponseBody
     public String join(@ModelAttribute User user){
         user.setRole("ROLE_USER");
+        String encodedPw = encoder.encode(user.getPassword());
+        user.setPassword(encodedPw);
         userRepository.save(user);
-        return "join";
+        return "redirect:/loginForm";
     }
-    @GetMapping("/login")
-    public String login(){
+    @GetMapping("/loginForm")
+    public String loginForm(){
         return "loginForm";
     }
     @GetMapping("/loginComplete")
