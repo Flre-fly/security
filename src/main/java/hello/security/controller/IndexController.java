@@ -3,6 +3,7 @@ package hello.security.controller;
 import hello.security.model.User;
 import hello.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,5 +55,11 @@ public class IndexController {
     @ResponseBody
     public String loginComplete(){
         return "loginComplete";
+    }
+    @Secured("ROLE_ADMIN")
+    @GetMapping("/info")
+    @ResponseBody
+    public String info(){
+        return "개인정보";
     }
 }
