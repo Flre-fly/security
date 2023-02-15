@@ -30,8 +30,9 @@ public class SecurityConfig{
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
-                .loginPage("/loginForm");
-
+                .loginPage("/loginForm")
+                .loginProcessingUrl("/login")// login 이라는 url이 호출되면 시큐리티가 낚아채서 대신 로그인을 진행시킴
+                .defaultSuccessUrl("/");//성공하면 메인페이지로 리다이렉트되도록ㅅ
         return http.build();
     }
 
