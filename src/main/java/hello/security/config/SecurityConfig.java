@@ -20,7 +20,10 @@ public class SecurityConfig{
                 .antMatchers("/user/**").authenticated()
                 .antMatchers("/manager/**").access("hasAnyRole('ROLE_MANAGER','ROLE_ADMIN')")
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
-                .anyRequest().permitAll();
+                .anyRequest().permitAll()
+                .and()
+                .formLogin()
+                .loginPage("/login");
 
         return http.build();
     }
