@@ -5,8 +5,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController("")
 public class SecurityController {
-    @GetMapping
+    @GetMapping("/")
     public String home(){
         return "root";
+    }
+    @GetMapping("/user")
+    public String user(){
+        return "user";
+    }
+    @GetMapping("/admin/pay")
+    public String pay(){
+        return "adminPay";
+    }
+    @GetMapping("/admin/a")
+    public String a(){
+        return "a";
     }
 }
